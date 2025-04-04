@@ -1,8 +1,9 @@
-import math
 import pygame
+import math
 import sys
 
 from screen import GameScreen
+from button import Button
 from game_screens import change_screen, dict_screens
 
 from settings import WIDTH, HEIGHT, TOP_COLOR, BOTTOM_COLOR
@@ -12,12 +13,21 @@ class Menu(GameScreen):
         super().__init__()
         self.display = pygame.display.get_surface()
         self.start_time = pygame.time.get_ticks()
+        self.button = Button()
 
     def event_loop(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    if self.button.button_start().collidepoint(event.pos):
+                        # change_screen('game')
+                        pass
+                    elif self.button.button_exit().collidepoint(event.pos):
+                        pygame.quit()
+                        sys.exit()
     
     def interpolate(self, c1, c2, t):
         return tuple(int(c1[i] * (1 - t) + c2[i] * t) for i in range(3))
@@ -51,5 +61,7 @@ class Menu(GameScreen):
         offset = (now // 30) % 100
         self.draw_moving_stripes(self.display, stripe_color, offset)
 
+        self.button.button_start_draw()
+        self.button.button_exit_draw()
 
 dict_screens['menu'] = Menu()
