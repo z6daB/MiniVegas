@@ -1,3 +1,8 @@
 WIDTH = 800
 HEIGHT = 600
+
 FPS = 60
+
+# Colors
+TOP_COLOR = (255, 0, 204)
+BOTTOM_COLOR = (0, 255, 255)
