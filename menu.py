@@ -23,8 +23,7 @@ class Menu(GameScreen):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     if self.button.button_start().collidepoint(event.pos):
-                        # change_screen('game')
-                        pass
+                        change_screen('game')
                     elif self.button.button_exit().collidepoint(event.pos):
                         pygame.quit()
                         sys.exit()
